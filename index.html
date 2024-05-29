@@ -7,7 +7,7 @@
     <style>
         /* Üst şerit */
         .header {
-            background-image: url("ihsancetin.com.tr/blog_files/blog_back.jpg");
+            background-image: url("/blog_markdowns/blog_back.jpg");
             background-size: cover;
             color: #fff;
             text-align: center;
@@ -50,6 +50,7 @@
             border: 1px solid #ddd;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
 </head>
 <body>
     <div class="header">
@@ -65,8 +66,6 @@
         <div class="blog-box">
             <h2>Blog Başlığı 1</h2>
             <p><a href="blog_markdowns/ornek_markdown.md" class="blog-link">deneme bir Rotor, mekanik gücü sağlayan hareketli parçadır. Rotor tipik olarak statorun manyetik alanının şaftı döndürmek için kuvvet uyguladığı akımları taşıyan iletkenleri tutar. Bazı rotorlar kalıcı mıknatıslar taşır. Kalıcı mıknatıslar geniş çalışma hızı ve güç aralığında yüksek verimlilik sunar .</a></p>
-
-
         </div>
         <div class="blog-box">
             <h2>Blog Başlığı 2</h2>
@@ -83,11 +82,13 @@
             link.addEventListener('click', function(event) {
                 event.preventDefault();
                 const url = this.href;
-                
+
                 fetch(url)
                     .then(response => response.text())
-                    .then(data => {
-                        document.getElementById('markdown-content').innerHTML = data;
+                    .then(markdown => {
+                        const converter = new showdown.Converter();
+                        const html = converter.makeHtml(markdown);
+                        document.getElementById('markdown-content').innerHTML = html;
                     })
                     .catch(error => console.error('Error fetching the Markdown file:', error));
             });
