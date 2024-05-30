@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Benim Blog Sayfam</title>
     <style>
-        /* Üst şeritt */
+        /* Üst şerit */
         .header {
             background-image: url("/blog_markdowns/blog_back.jpg");
             /* background-size: cover; */
@@ -89,6 +89,8 @@
                         const converter = new showdown.Converter();
                         const html = converter.makeHtml(markdown);
                         document.getElementById('markdown-content').innerHTML = html;
+                        // Sayfanın markdown içeriğine kaymasını sağla
+                        document.getElementById('markdown-content').scrollIntoView({ behavior: 'smooth' });
                     })
                     .catch(error => console.error('Error fetching the Markdown file:', error));
             });
